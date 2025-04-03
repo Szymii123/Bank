@@ -13,24 +13,24 @@ namespace Bank
 
         public KontoLimit(string klient, decimal bilansNaStart, decimal limitDebetowy)
         {
-            konto = new Konto(klient, bilansNaStart);
+            konto = new Konto(klient, bilansNaStart + limitDebetowy);
             this.limitDebetowy = limitDebetowy;
         }
 
         public string Nazwa => konto.Nazwa;
-        public decimal Bilans => konto.Bilans + limitDebetowy;
+        public decimal Bilans => konto.Bilans;
         public bool Zablokowane => konto.Zablokowane;
 
         public void Wplata(decimal kwota)
         {
             konto.Wplata(kwota);
-            if (konto.Bilans >= 0) konto.OdblokujKonto();
+            if (konto.Bilans >= limitDebetowy) konto.OdblokujKonto();
         }
 
         public void Wyplata(decimal kwota)
         {
             konto.Wyplata(kwota);
-            if (konto.Bilans < 0) konto.BlokujKonto();
+            if (konto.Bilans < limitDebetowy) konto.BlokujKonto();
         }
     }
 }

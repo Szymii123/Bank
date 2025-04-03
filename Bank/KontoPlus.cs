@@ -11,7 +11,7 @@ namespace Bank
     {
         private decimal limitDebetowy;
 
-        public KontoPlus(string klient, decimal bilansNaStart, decimal limitDebetowy) : base(klient, bilansNaStart)
+        public KontoPlus(string klient, decimal bilansNaStart, decimal limitDebetowy) : base(klient, bilansNaStart + limitDebetowy)
         {
             this.limitDebetowy = limitDebetowy;
         }
@@ -26,18 +26,16 @@ namespace Bank
             }
         }
 
-        public new decimal Bilans => base.Bilans + limitDebetowy;
-
         public new void Wyplata(decimal kwota)
         {
             base.Wyplata(kwota);
-            if (base.Bilans < 0) BlokujKonto();
+            if (base.Bilans < limitDebetowy) BlokujKonto();
         }
 
         public new void Wplata(decimal kwota)
         {
             base.Wplata(kwota);
-            if (base.Bilans >= 0) OdblokujKonto();
+            if (base.Bilans >= limitDebetowy) OdblokujKonto();
         }
 
     }

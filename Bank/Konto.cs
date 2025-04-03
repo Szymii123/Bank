@@ -29,8 +29,8 @@
 
         public void Wplata(decimal kwota)
         {
-            if (zablokowane) throw new InvalidOperationException("Konto jest zablokowane.");
-            if (kwota <= 0) throw new ArgumentException("Kwota musi być większa niż 0.");
+			//if (zablokowane) throw new InvalidOperationException("Konto jest zablokowane.");
+			if (kwota <= 0) throw new ArgumentException("Kwota musi być większa niż 0.");
             bilans += kwota;
         }
 

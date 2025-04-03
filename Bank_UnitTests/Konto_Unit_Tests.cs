@@ -64,6 +64,7 @@ namespace BankTests
             ClassicAssert.IsFalse(konto.Zablokowane);
         }
 
+		/* Usuniete w kroku drugim
         [Test]
         public void Wplata_OnBlockedAccount_ShouldThrowException()
         {
@@ -71,6 +72,7 @@ namespace BankTests
             konto.BlokujKonto();
             Assert.Throws<InvalidOperationException>(() => konto.Wplata(50));
         }
+		*/
 
         [Test]
         public void Wyplata_OnBlockedAccount_ShouldThrowException()
